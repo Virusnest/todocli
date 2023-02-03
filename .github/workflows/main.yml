@@ -1,9 +1,25 @@
-- uses: BSFishy/meson-build@v1.0.3
-  with:
-    action: test
-    directory: build
-    setup-options: -Db_coverage=true
-    options: --verbose
-    meson-version: 0.53.2
-    ninja-version: 1.9.0.post1
-    gcovr-version: 4.2
+on:
+  push:
+    branches:
+    - main
+    - release/*
+  pull_request:
+    branches:
+    - main
+jobs:
+  my_job:
+    name: deploy to staging
+    runs-on: 
+      -ubuntu-18.04
+      -macos-10.15
+    steps:     
+    - name: Setup Meson
+      uses: BSFishy/meson-build@v1.0.3
+      with:
+        action: test
+        directory: build
+        setup-options: -Db_coverage=true
+        options: --verbose
+        meson-version: 0.53.2
+        ninja-version: 1.9.0.post1
+        gcovr-version: 4.2
