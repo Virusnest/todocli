@@ -7,13 +7,14 @@ on:
     branches:
     - main
 jobs:
-  test:
+  build:
     name: deploy to staging
     runs-on: ubuntu-18.04
-    steps:     
+    
+    steps:
     - name: Setup python
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v4.5.0
     - uses: ashutoshvarma/setup-ninja@v1.1
       with: 
         version: 1.10.0
