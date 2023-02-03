@@ -1,6 +1,27 @@
-steps:
-- uses: actions/checkout@v2
-- uses: actions/setup-python@v1
-- uses: BSFishy/meson-build@v1.0.3
-  with:
-    action: test
+on:
+  push:
+    branches:
+    - main
+    - release/*
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    name: deploy to staging
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v4.5.0
+    - uses: ashutoshvarma/setup-ninja@v1.1
+      with: 
+        version: 1.10.0
+        python-version: 3.11.0
+
+    
+    - name: setup meson
+      run: |
+        pip3 install meson
+        meson setup build
+        meson compile -C build
