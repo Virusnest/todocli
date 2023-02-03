@@ -13,7 +13,7 @@ using namespace std;
 struct winsize w;
 Value root;
 string version = "todocli | 1.0.0";
-int systime = chrono::duration_cast<chrono::seconds>(chrono::system_clock::now().time_since_epoch()).count();
+int systime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 int day = 86400;
 string configPath = string(getenv("HOME"))+"/.config/todotui/config.json";
 
