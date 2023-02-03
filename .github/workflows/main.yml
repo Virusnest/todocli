@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:     
     - name: Setup Meson
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
-    - uses: BSFishy/meson-build@v1.0.3
+    - uses: BSFishy/meson-build@v1
       with:
         action: test
