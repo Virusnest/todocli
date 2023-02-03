@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-18.04
     
     steps:
-    - name: Setup python
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - uses: actions/setup-python@v4.5.0
     - uses: ashutoshvarma/setup-ninja@v1.1
       with: 
