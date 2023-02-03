@@ -11,9 +11,13 @@ jobs:
     name: deploy to staging
     runs-on: ubuntu-18.04
     steps:     
-    - name: Setup Meson
+    - name: Setup python
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v1
-    - uses: BSFishy/meson-build@v1
-      with:
-        action: test
+    - uses: ashutoshvarma/setup-ninja@v1.1
+    
+    - name: setup meson
+      run: pip3 install meson
+    - run: meson setup build
+    - run: meson wrap install jsoncpp
+    - run: meson compile -C build
