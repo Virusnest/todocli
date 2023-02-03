@@ -21,6 +21,7 @@ jobs:
     
     - name: setup meson
       run: |
+        pip3 install meson
         meson setup build
         meson wrap install jsoncpp
         meson compile -C build
