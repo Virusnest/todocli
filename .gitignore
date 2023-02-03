@@ -30,5 +30,9 @@ packagecache
 /docs/built_docs
 /docs/hotdoc-private*
 
+/subprojects/*
+
+!/subprojects/*.wrap
+
 *.pyc
 /*venv
