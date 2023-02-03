@@ -13,7 +13,7 @@ jobs:
     
     steps:
     - name: Setup python
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     - uses: actions/setup-python@v4.5.0
     - uses: ashutoshvarma/setup-ninja@v1.1
       with: 
@@ -21,6 +21,7 @@ jobs:
 
     
     - name: setup meson
-    - run: meson setup build
-    - run: meson wrap install jsoncpp
-    - run: meson compile -C build
+      run: |
+        meson setup build
+        meson wrap install jsoncpp
+        meson compile -C build
