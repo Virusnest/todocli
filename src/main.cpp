@@ -5,18 +5,18 @@
 #include <fstream>
 #include <stdlib.h>
 #include "main.h"
-#include <json/json.h>
 #include <sys/stat.h>
-using namespace Json;
+#include <json/json.h>
+
 using namespace std;
+using namespace Json;
 
 struct winsize w;
-Value root;
 string version = "todocli | 1.0.0";
 int systime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 int day = 86400;
 string configPath = string(getenv("HOME"))+"/.config/todotui/config.json";
-
+Value root;
 int main(int argc, char *argv[]) {
   loadConfig();
   if(parseArgs(argc, argv)==1){
@@ -197,3 +197,4 @@ string formatTimeLeft(int timestamp) {
   string time = to_string(abs(days)) + "d, " + to_string(abs(hours)) + "h";
   return time;
 }
+
