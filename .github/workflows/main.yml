@@ -14,5 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: threeal/cmake-action@v1.1.0
+    - uses: actions/upload-artifact@v3.1.2
       with: 
         build-dir: build
+        name: todocli
+        path: build/bin/todocli
