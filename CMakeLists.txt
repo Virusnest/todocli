@@ -11,6 +11,7 @@ FetchContent_Declare(json
 FetchContent_MakeAvailable(json)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE jsoncpp_lib)
 
