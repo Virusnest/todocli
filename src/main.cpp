@@ -16,7 +16,7 @@ struct winsize w;
 string version = "todocli | 1.0.0";
 int systime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 int day = 86400;
-string configPath = string(getenv("HOME"))+"/.config/todotui/config.json";
+string configPath = string(getenv("HOME"))+"/.config/todocli/config.json";
 Value root;
 int main(int argc, char *argv[]) {
   loadConfig();
@@ -102,7 +102,7 @@ void generateConfig() {
   root["tasks"][0]["timestamp"] = systime + day;
   root["tasks"][0]["name"] = "Task 1";
   root["tasks"][0]["done"] = false;
-  mkdir((string(getenv("HOME"))+"/.config/todotui").c_str(),0777);
+  mkdir((string(getenv("HOME"))+"/.config/todocli").c_str(),0777);
   ofstream stream;
   stream.open(configPath);
   StreamWriterBuilder builder;
