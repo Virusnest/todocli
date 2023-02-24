@@ -2,7 +2,7 @@
 using namespace std;
 void spacerPrint(char spc);
 
-void endPrint(string text, int width);
+void endPrint(string text, int width,int stringlen);
 
 void generateConfig();
 

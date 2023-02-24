@@ -13,7 +13,7 @@ using namespace std;
 using namespace Json;
 
 struct winsize w;
-string version = "todocli | 1.0.0";
+string version = "todocli | 1.0.1";
 int systime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 int day = 86400;
 string configPath = string(getenv("HOME"))+"/.config/todocli/config.json";
@@ -90,9 +90,9 @@ void spacerPrint(char spc) {
   }
 }
 
-void endPrint(string text, int width){
+void endPrint(string text, int width,int stringlen){
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-  for(int i = 0; i < w.ws_col-width-text.length()+1; i++) {
+  for(int i = 0; i < w.ws_col-width-stringlen+1; i++) {
     printf(" ");
   }
   printf("%s",text.c_str());
@@ -132,6 +132,9 @@ void saveConfig() {
 }
 
 void draw() {
+  if(root["tasks"].empty()){
+    return;
+  } 
   //draw the screen
   spacerPrint('-');
   int loopindex = 1;
@@ -145,11 +148,11 @@ void draw() {
     string time = buffer;
     time.erase(time.length()-5,time.length());
     if(x["done"].asBool() == true) {
-      endPrint(" [DONE]\n",listItem.length());
+      endPrint(" \033[1;32m[DONE]\033[0m\n",listItem.length(),8);
     }else if (x["timestamp"].asInt() < systime) {
-      endPrint(time+" [OVERDUE]\n",listItem.length());
+      endPrint(time+" \033[1;31m[OVERDUE]\033[0m\n",listItem.length(),30);
     } else {
-      endPrint(time +" [TODO]\n",listItem.length());
+      endPrint(time +" [TODO]\n",listItem.length(),27);
     }
     listItem = "";
     loopindex++;
