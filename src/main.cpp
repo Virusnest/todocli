@@ -13,7 +13,7 @@ using namespace std;
 using namespace Json;
 
 struct winsize w;
-string version = "todocli | 1.0.1";
+string version = "todocli | 1.0.2";
 int systime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 int day = 86400;
 string configPath = string(getenv("HOME"))+"/.config/todocli/config.json";
@@ -44,17 +44,23 @@ int parseArgs(int argc, char *argv[]) {
   -v Show Version");
     } else if (word == "-a"||word == "--add"){
       if(argc > 2) {
-        addTask(string(argv[2]), (stoi(argv[3])*day)+systime);
+        try{
+          addTask(string(argv[2]), (stoi(argv[3])*day)+systime);
+        }catch(...){printf("-a [NAME]  [+DAYS] Add New Item\n");}
         saveConfig();
       }
     } else if (word == "-r"||word == "--remove"){
       if(argc > 2) {
-        removeTask(stoi(argv[2]));
+        try{
+          removeTask(stoi(argv[2]));
+        }catch(...){printf("-r [INDEX] Remove Item\n");}
         saveConfig();
       } 
     } else if (word == "-t"||word == "--toggle"){
       if(argc > 2) {
-        toggleTask(stoi(argv[2]));
+        try{
+          toggleTask(stoi(argv[2]));
+        }catch(...){printf("-t [INDEX] Toggle Item State\n");}
         saveConfig();
       }
     }else if (word == "-v"||word == "--version"){
@@ -67,12 +73,16 @@ int parseArgs(int argc, char *argv[]) {
       saveConfig();
     }else if (word == "-e"||word == "--edit"){
       if(argc > 2) {
-        editTask(stoi(argv[2]),string(argv[3]));
+        try{
+          editTask(stoi(argv[2]),string(argv[3]));
+        }catch(...){printf("-e [INDEX] [NAME] Edit Item\n");}
         saveConfig();
       }
     }else if(word == "-x"||word == "--extend"){
       if(argc > 2) {
-        extendTask(stoi(argv[2]),stoi(argv[3]));
+        try{
+          extendTask(stoi(argv[2]),stoi(argv[3]));
+        }catch(...){printf("-x [INDEX] [+DAYS] Extend Item\n");}
         saveConfig();
       }
     }else{
